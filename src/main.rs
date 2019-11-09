@@ -32,11 +32,11 @@ fn main() {
         App::new()
             .wrap(middleware::Logger::default())
             .service(web::resource("/").route(web::post().to(index)))
-    }).bind("0.0.0.0:8081")
+    }).bind("0.0.0.0:8080")
     .unwrap()
     .shutdown_timeout(1)
     .start();
 
-    println!("Started http server: 127.0.0.1:8081");
+    println!("Started http server: 0.0.0.0:8080");
     let _ = sys.run();
 }

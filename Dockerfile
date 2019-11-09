@@ -9,5 +9,7 @@ COPY . .
 # Install production dependencies and build a release artifact.
 RUN cargo install
 
+ENV PORT 8080
+EXPOSE 8080
 # Run the web service on container startup.
 CMD ["rust-example"]
