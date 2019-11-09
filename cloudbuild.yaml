@@ -19,4 +19,4 @@ steps:
       - 'us-central1'
       - '--platform'
       - 'managed'
-timeout: 1200s
+timeout: 1800s
