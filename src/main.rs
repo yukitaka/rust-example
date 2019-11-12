@@ -4,21 +4,16 @@ extern crate actix_web;
 extern crate bytes;
 extern crate env_logger;
 extern crate prost;
-#[macro_use]
 extern crate prost_derive;
 
 use actix_protobuf::*;
 use actix_web::*;
 
-#[derive(Clone, PartialEq, Message)]
-pub struct MyObj {
-    #[prost(int32, tag = "1")]
-    pub number: i32,
-    #[prost(string, tag = "2")]
-    pub name: String,
+pub mod my_obj {
+    include!(concat!(env!("OUT_DIR"), "/rust_example.rs"));
 }
 
-fn index(msg: ProtoBuf<MyObj>) -> Result<HttpResponse> {
+fn index(msg: ProtoBuf<my_obj::MyObj>) -> Result<HttpResponse> {
     println!("model: {:?}", msg);
     HttpResponse::Ok().protobuf(msg.0) // <- send response
 }

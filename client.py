@@ -11,7 +11,7 @@
 
 # python3 client.py
 
-import test_pb2
+import myobj_pb2
 import traceback
 import sys
 
@@ -20,7 +20,7 @@ import aiohttp
 
 def op():
     try:
-        obj = test_pb2.MyObj()
+        obj = myobj_pb2.MyObj()
         obj.number = 9
         obj.name = 'USB'
 
@@ -32,7 +32,7 @@ def op():
         #  message transmission  #
         #------------------------#
         receiveDataStr = sendDataStr
-        receiveData = test_pb2.MyObj()
+        receiveData = myobj_pb2.MyObj()
 
         #Deserialize
         receiveData.ParseFromString(receiveDataStr)
@@ -45,19 +45,19 @@ def op():
 
 
 async def fetch(session):
-    obj = test_pb2.MyObj()
+    obj = myobj_pb2.MyObj()
     obj.number = 9
     obj.name = 'USB'
-    async with session.post('http://127.0.0.1:8081/', data=obj.SerializeToString(),
+    async with session.post('http://localhost:8080', data=obj.SerializeToString(),
         headers={"content-type": "application/protobuf"}) as resp:
         print(resp.status)
         data = await resp.read()
-        receiveObj = test_pb2.MyObj()
+        receiveObj = myobj_pb2.MyObj()
         receiveObj.ParseFromString(data)
         print(receiveObj)
 
 async def go(loop):
-    obj = test_pb2.MyObj()
+    obj = myobj_pb2.MyObj()
     obj.number = 9
     obj.name = 'USB'
     async with aiohttp.ClientSession(loop=loop) as session:
