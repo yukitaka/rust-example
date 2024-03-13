@@ -1,6 +1,6 @@
 [package]
 name = "rust-example"
-version = "0.4.1"
+version = "0.4.2"
 edition = "2021"
 authors = ["yukitaka <s.yukkiy@gmail.com>"]
 build = "build.rs"
@@ -10,7 +10,7 @@ env_logger = "0.11"
 
 prost = { version = "0.12", default_features = false, features = ["prost-derive"] }
 
-actix-web = "4"
+actix-web = "4.5"
 actix-protobuf = "0.10"
 
 [build-dependencies]
